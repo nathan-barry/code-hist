@@ -10,11 +10,11 @@ import (
 
 func main() {
 	// Create URL
-	repoName := "nathan-barry/code-hist"
+	repoName := "nathan-barry/nathan.rs"
 	url := "https://api.github.com/repos/" + repoName + "/commits"
 
-	var data any
-	getJSON(url, &data)
+	// var data any
+	// getJSON(url, &data)
 
 	// prettyJSON, _ := json.MarshalIndent(data, "", "    ")
 	// fmt.Println(string(prettyJSON))
@@ -27,10 +27,10 @@ func main() {
 	}
 
 	url = "https://api.github.com/repos/" + repoName + "/commits/" + commits[0].SHA
-	var commitData any
-	getJSON(url, &commitData)
+	var commitFiles Files
+	getJSON(url, &commitFiles)
 
-	prettyJSON, _ := json.MarshalIndent(commitData, "", "    ")
+	prettyJSON, _ := json.MarshalIndent(commitFiles, "", "    ")
 	fmt.Println(string(prettyJSON))
 
 }
@@ -66,4 +66,21 @@ func getJSON(url string, data any) {
 	if err := json.Unmarshal(body, &data); err != nil {
 		log.Fatal(err)
 	}
+}
+
+type Files struct {
+	Files []File `json:"files"`
+}
+
+type File struct {
+	FileName    string `json:"filename"`
+	Changes     int    `json:"changes"`
+	Additions   int    `json:"additions"`
+	Deletions   int    `json:"deletions"`
+	BlobURL     string `json:"blob_url"` // Link to github
+	ContentsURL string `json:"contents_url"`
+	RawURL      string `json:"raw_url"` // Contains file in resp.Body
+	Patch       string `json:"patch"`
+	SHA         string `json:"sha"`
+	Status      string `json:"status"`
 }
