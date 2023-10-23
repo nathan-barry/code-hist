@@ -1,24 +1,15 @@
 package main
 
 import (
-	"html/template"
+	"fmt"
 	"net/http"
+
+	"github.com/nathan-barry/code-hist/pkg/handlers"
 )
 
 func main() {
-	http.HandleFunc("/", HomeHandler)
+	fmt.Println("Starting server...")
+
+	http.HandleFunc("/", handlers.HomeHandler)
 	http.ListenAndServe(":8080", nil)
-}
-
-func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	template := template.Must(template.ParseGlob("../../templates/*/*.html"))
-
-	data := map[string]interface{}{
-		"Title": "Home Page",
-	}
-
-	err := template.ExecuteTemplate(w, "index.html", data)
-	if err != nil {
-		http.Error(w, "Could not render template", http.StatusInternalServerError)
-	}
 }
