@@ -30,14 +30,20 @@ func GetBody(url string) []byte {
 func GetJSON(url string, data any) {
 	body := GetBody(url)
 	if err := json.Unmarshal(body, &data); err != nil {
+		fmt.Println("Get JSON Fucked up", err)
 		log.Fatal(err)
 	}
 }
 
-func PrintJSON(data any) {
+func PrettyJSON(data any) []byte {
 	prettyJSON, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
+		fmt.Println("PrettyJSON Fucked up")
 		log.Fatal(err)
 	}
-	fmt.Println(string(prettyJSON))
+	return prettyJSON
+}
+
+func PrintJSON(data any) {
+	fmt.Println(string(PrettyJSON(data)))
 }

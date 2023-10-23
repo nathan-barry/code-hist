@@ -11,7 +11,11 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 
 	t := template.Must(template.ParseFiles("./templates/partials/base.html", "./templates/home/index.html"))
 
-	err := t.ExecuteTemplate(w, "base.html", nil)
+	data := map[string]any{
+		"Title": "Whazzup Bitches",
+	}
+
+	err := t.ExecuteTemplate(w, "base.html", data)
 	if err != nil {
 		http.Error(w, "Could not render template", http.StatusInternalServerError)
 	}

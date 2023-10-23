@@ -1,7 +1,10 @@
 package types
 
 type Commit struct {
-	SHA string `json:"sha"`
+	SHA       string `json:"sha"` // sha to file
+	Committer string `json:"commit.committer.name"`
+	Date      string `json:"commit.committer.date"`
+	Message   string `json:"commit.message"`
 }
 
 type Files struct {
@@ -15,7 +18,7 @@ type File struct {
 	Deletions   int    `json:"deletions"`
 	BlobURL     string `json:"blob_url"` // Link to github
 	ContentsURL string `json:"contents_url"`
-	RawURL      string `json:"raw_url"` // Contains file in resp.Body
+	RawURL      string `json:"raw_url"` // Contains entire file in resp.Body
 	Patch       string `json:"patch"`
 	SHA         string `json:"sha"`
 	Status      string `json:"status"`
