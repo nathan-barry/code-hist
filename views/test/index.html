@@ -1,20 +1,26 @@
 {{define "content"}}
-<h1 class="color: #f18672">Below are recent commit messages</h1>
-{{ range .Commits }}
-<br>
-<div class="color: #000">{{ .SHA }}</div>
-<div>{{ .Commit.Committer.Date }}</div>
-<div>{{ .Commit.Message }}</div>
-<br>
-<hr>
-{{end}}
+<div class="grid grid-cols-5 gap-4">
+    <div class="col-span-1 bg-teal-500">
+        {{ range .Commits }}
+        <br>
+        <div>{{ .Commit.Message }}</div>
+        <br>
+        <hr>
+        {{end}}
+    </div>
 
-<h1>Below should be file</h1>
-<div style="white-space: pre-wrap;">{{ .FileBody }}</div>
-{{ range .FileArray }}
-<br>
-<div>{{ . }}</div>
-<br>
-<hr>
-{{end}}
+    <div class="col-span-3 bg-red-500">
+        <h1>Below should be file</h1>
+        <div style="white-space: pre-wrap;">{{ .FileBody }}</div>
+    </div>
+
+    <div class="col-span-1 bg-blue-500">
+        {{ range .FileArray }}
+        <br>
+        <div>{{ .FileName }}</div>
+        <br>
+        <hr>
+        {{end}}
+    </div>
+</div>
 {{end}}
