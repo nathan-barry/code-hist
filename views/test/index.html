@@ -1,4 +1,9 @@
 {{define "content"}}
+<div>
+    <form actions="/fetch-repo" method="POST">
+        <input type="text" name="repoURL" placeholder="Enter Github Repo URL">
+    </form>
+</div>
 <div class="grid grid-cols-5 gap-4">
     <div class="col-span-1 bg-teal-500">
         {{ range .Commits }}

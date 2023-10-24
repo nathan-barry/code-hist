@@ -8,17 +8,28 @@ import (
 	"net/http"
 )
 
-func GetBody(url string) []byte {
-	fmt.Println("Getting from URL:", url)
+// Takes in the URL and an optional github api key
+func GetBody(url string, key string) []byte {
+	fmt.Println("\nGetting from URL:", url)
 
-	// Get response from URL
-	resp, err := http.Get(url)
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// If key isn't empty, add it to header
+	if key != "" {
+		req.Header.Set("Authorization", fmt.Sprintf("token %s", key))
+	}
+
+	resp, err := client.Do(req)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer resp.Body.Close()
+	fmt.Println("STATUS CODE:", resp.StatusCode)
 
-	// Read body of response
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
@@ -27,8 +38,8 @@ func GetBody(url string) []byte {
 	return body
 }
 
-func GetJSON(url string, data any) {
-	body := GetBody(url)
+func GetJSON(url string, data any, key string) {
+	body := GetBody(url, key)
 	if err := json.Unmarshal(body, &data); err != nil {
 		fmt.Println("Get JSON Fucked up", err)
 		log.Fatal(err)
@@ -44,6 +55,6 @@ func PrettyJSON(data any) []byte {
 	return prettyJSON
 }
 
-func PrintJSON(data any) {
-	fmt.Println(string(PrettyJSON(data)))
+func PrintJSON(name string, data any) {
+	fmt.Println("PRINT_JSON: " + name + ":\n" + string(PrettyJSON(data)))
 }
