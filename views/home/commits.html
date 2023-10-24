@@ -1,8 +1,8 @@
 <div>
     {{ range .RawCommits }}
-    <br>
-    <p>{{.Commit.Message}}</p>
-    <br>
+    <button hx-post="/fetch-files" hx-target="#files" hx-vals='{"sha": "{{.SHA}}", "url": "{{$.URL}}"}'>
+        {{.Commit.Message}}
+    </button>
     <hr>
     {{end}}
 </div>

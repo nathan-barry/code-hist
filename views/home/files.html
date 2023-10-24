@@ -1,0 +1,8 @@
+<div>
+    {{ range .FileArray }}
+    <button hx-post="/fetch-file" hx-target="#file">
+        {{.FileName}}
+    </button>
+    <hr>
+    {{end}}
+</div>

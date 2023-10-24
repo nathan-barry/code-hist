@@ -1,7 +1,7 @@
 package types
 
 type RawCommit struct {
-	SHA    string `json:"sha"` // sha to file
+	SHA    string `json:"sha"` // sha to commit files
 	Commit struct {
 		Committer struct {
 			Name string `json:"name"`

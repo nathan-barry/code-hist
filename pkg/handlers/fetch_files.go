@@ -12,8 +12,8 @@ import (
 	. "github.com/nathan-barry/code-hist/pkg/types"
 )
 
-func FetchRepoHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Pinged -> FetchRepo")
+func FetchFilesHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Pinged -> FetchFiles")
 
 	err := godotenv.Load(".env")
 	if err != nil {
@@ -21,19 +21,15 @@ func FetchRepoHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	githubKey := os.Getenv("GITHUB_AUTH")
 
-	url := "https://api.github.com/repos/" + r.FormValue("repoURL") + "/commits"
-	fmt.Println(url)
-	var rawCommits []RawCommit
-	fmt.Println("HERE 1")
-	api.GetJSON(url, &rawCommits, githubKey)
-	fmt.Println("HERE 2")
-	api.PrintJSON("rawCommits[0]", rawCommits[0])
+	url := r.FormValue("url") + "/" + r.FormValue("sha")
 
-	t := template.Must(template.ParseFiles("./views/home/commits.html"))
+	var commitFiles Files
+	api.GetJSON(url, &commitFiles, githubKey)
+
+	t := template.Must(template.ParseFiles("./views/home/files.html"))
 
 	data := map[string]any{
-		"RawCommits": rawCommits,
-		"URL":        url,
+		"FileArray": commitFiles.Files,
 	}
 
 	err = t.Execute(w, data)
