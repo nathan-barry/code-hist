@@ -1,6 +1,6 @@
 <div>
     {{ range .FileArray }}
-    <button hx-post="/fetch-file" hx-target="#file">
+    <button hx-post="/fetch-code" hx-target="#code" hx-vals='{"raw_url": "{{.RawURL}}"}'>
         {{.FileName}}
     </button>
     <hr>
