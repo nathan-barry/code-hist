@@ -1,1 +1,8 @@
-<div>{{ .Method }}</div>
+<div>
+    {{ range .RawCommits }}
+    <br>
+    <p>{{.Commit.Message}}</p>
+    <br>
+    <hr>
+    {{end}}
+</div>
