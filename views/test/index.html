@@ -1,0 +1,20 @@
+{{define "content"}}
+<h1 class="color: #f18672">Below are recent commit messages</h1>
+{{ range .Commits }}
+<br>
+<div class="color: #000">{{ .SHA }}</div>
+<div>{{ .Commit.Committer.Date }}</div>
+<div>{{ .Commit.Message }}</div>
+<br>
+<hr>
+{{end}}
+
+<h1>Below should be file</h1>
+<div style="white-space: pre-wrap;">{{ .FileBody }}</div>
+{{ range .FileArray }}
+<br>
+<div>{{ . }}</div>
+<br>
+<hr>
+{{end}}
+{{end}}

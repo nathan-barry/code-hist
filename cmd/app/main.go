@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/nathan-barry/code-hist/pkg/handlers"
@@ -9,8 +10,11 @@ import (
 
 func main() {
 	fmt.Println("Starting server...")
+	fs := http.FileServer(http.Dir("static"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	http.HandleFunc("/", handlers.HomeHandler)
 	http.HandleFunc("/test", handlers.TestHandler)
-	http.ListenAndServe(":8080", nil)
+	http.HandleFunc("/testauth", handlers.TestAuthHandler)
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }

@@ -1,10 +1,14 @@
 package types
 
-type Commit struct {
-	SHA       string `json:"sha"` // sha to file
-	Committer string `json:"commit.committer.name"`
-	Date      string `json:"commit.committer.date"`
-	Message   string `json:"commit.message"`
+type RawCommit struct {
+	SHA    string `json:"sha"` // sha to file
+	Commit struct {
+		Committer struct {
+			Name string `json:"name"`
+			Date string `json:"date"`
+		}
+		Message string `json:"message"`
+	}
 }
 
 type Files struct {

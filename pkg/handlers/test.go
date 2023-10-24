@@ -21,7 +21,7 @@ func TestHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	githubKey := os.Getenv("GITHUB_AUTH")
-	fmt.Println(fmt.Sprintf("Bearer %s", githubKey))
+	fmt.Println(fmt.Sprintf("token %s", githubKey))
 
 	fmt.Println("Pinged -> Test")
 	repoName := "nathan-barry/code-hist"
@@ -35,7 +35,9 @@ func TestHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Set the Authorization header with your access token
-	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", githubKey))
+	req.Header.Set("Authorization", fmt.Sprintf("token %s", githubKey))
+	fmt.Println(fmt.Sprintf("token %s", githubKey))
+	fmt.Println("REQUEST", req)
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -49,39 +51,61 @@ func TestHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(string(body))
+	// fmt.Println(string(body))
 
-	var commits []Commit
-	if err := json.Unmarshal(body, &commits); err != nil {
+	var rawCommits []RawCommit
+	if err := json.Unmarshal(body, &rawCommits); err != nil {
 		fmt.Println("Get JSON Fucked up")
 		log.Fatal(err)
 	}
 
-	for i, c := range commits {
-		// Prints SHA
+	for i, c := range rawCommits {
 		api.PrintJSON(c)
 		if i > 2 {
 			break
 		}
 	}
 
+	// for i := range rawCommits {
+	// 	url = "https://api.github.com/repos/" + repoName + "/commits/" + rawCommits[i].SHA
+	// 	fmt.Println(url)
+	// 	fmt.Println("wazzup bitch")
+
+	// 	var commitFiles Files
+	// 	api.GetJSON(url, &commitFiles)
+	// 	// api.PrintJSON(commitFiles.Files[0])
+
+	// 	fmt.Println("before index")
+	// 	api.PrintJSON(commitFiles)
+	// 	// url = commitFiles.Files[0].RawURL
+	// 	fmt.Println("after index")
+	// }
+
 	// Latest commit
-	url = "https://api.github.com/repos/" + repoName + "/commits/" + commits[0].SHA
+	url = "https://api.github.com/repos/" + repoName + "/commits/" + rawCommits[0].SHA
 	fmt.Println(url)
+	fmt.Println("wazzup bitch")
 
 	var commitFiles Files
 	api.GetJSON(url, &commitFiles)
 	// api.PrintJSON(commitFiles.Files[0])
+
+	fmt.Println("before index")
+	// api.PrintJSON(commitFiles)
 	url = commitFiles.Files[0].RawURL
+	fmt.Println("after index")
+
+	fmt.Println("before getbody")
 	fileBody := api.GetBody(url)
+	fmt.Println("after getbody")
 
-	// fmt.Print(string(api.GetBody(commitFiles.Files[0].RawURL)))
+	fmt.Print(string(api.GetBody(commitFiles.Files[0].RawURL)))
 
-	t := template.Must(template.ParseFiles("./templates/partials/base.html", "./templates/test/index.html"))
+	t := template.Must(template.ParseFiles("./views/partials/base.html", "./views/test/index.html"))
 
 	data := map[string]any{
 		"Title":     "Whazzup Bitches 2",
-		"Commits":   commits,
+		"Commits":   rawCommits,
 		"FileArray": commitFiles.Files,
 		"FileBody":  string(fileBody),
 	}

@@ -9,7 +9,7 @@ import (
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Pinged -> Home")
 
-	t := template.Must(template.ParseFiles("./templates/partials/base.html", "./templates/home/index.html"))
+	t := template.Must(template.ParseFiles("./views/partials/base.html", "./views/home/index.html"))
 
 	data := map[string]any{
 		"Title": "Whazzup Bitches",
