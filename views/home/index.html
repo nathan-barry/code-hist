@@ -1,7 +1,24 @@
 {{define "content"}}
-<div class="bg-red-500">
-    <h1 class="text-xl">Welcome to the Home Page</h1>
-    <p class="text-orange-200">This is the content of your home page.</p>
-    <a href="/test">Test<a>
+<div>
+    <form hx-post="/fetch-repo" hx-target="#commitsList">
+        <input type="text" name="repoURL" placeholder="Enter Github Repo URL">
+    </form>
+</div>
+<div class="grid grid-cols-5 gap-4">
+    <div id="commits" class="col-span-1 bg-teal-500">
+        <h1>Commits</h1>
+        <div id="commitsList"></div>
+
+    </div>
+
+    <div id="file" class="col-span-3 bg-red-500">
+        <h1>File</h1>
+
+    </div>
+
+    <div id="files" class="col-span-1 bg-blue-500">
+        <h1>Files</h1>
+
+    </div>
 </div>
 {{end}}
