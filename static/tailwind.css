@@ -434,6 +434,55 @@ video {
   display: none;
 }
 
+/* html { */
+
+/* 	font-family: serif */
+
+/* } */
+
+body {
+  --tw-bg-opacity: 1;
+  background-color: rgb(40 40 40 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(235 219 178 / var(--tw-text-opacity));
+}
+
+/* 	h1, h2, h3, h4, h5, h6 { */
+
+/* 		@apply font-bold relative */
+
+/* 	} */
+
+/* 	h1 { */
+
+/* 		@apply text-4xl */
+
+/* 	} */
+
+/* 	h2 { */
+
+/* 		@apply text-2xl */
+
+/* 	} */
+
+/* 	li { */
+
+/* 		@apply cursor-pointer */
+
+/* 	} */
+
+/*     p { */
+
+/*         @apply text-lg md:text-xl md:text-justify mt-6; */
+
+/*     } */
+
+/* code { */
+
+/*     @apply text-sm bg-darkgrey text-highlight p-1 rounded */
+
+/* } */
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
