@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-	/* html { */
-	/* 	font-family: serif */
-	/* } */
+	html {
+		font-family: monospace 
+	}
+
 	body {
 		@apply bg-gruvbox-bg text-gruvbox-fg
 	}

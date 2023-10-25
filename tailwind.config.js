@@ -24,6 +24,7 @@ module.exports = {
         'gruvbox-gray': '#a89984',
       },
       borderColor: {
+        'gruvbox-fg': '#ebdbb2',
         'gruvbox-red': '#cc241d',
         'gruvbox-green': '#98971a',
         'gruvbox-yellow': '#d79921',

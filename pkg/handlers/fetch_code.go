@@ -21,12 +21,14 @@ func FetchCodeHandler(w http.ResponseWriter, r *http.Request) {
 	githubKey := os.Getenv("GITHUB_AUTH")
 
 	url := r.FormValue("raw_url")
+	fileName := r.FormValue("file_name")
 	body := api.GetBody(url, githubKey)
 
 	t := template.Must(template.ParseFiles("./views/home/code.html"))
 
 	data := map[string]any{
-		"Code": string(body),
+		"Code":     string(body),
+		"FileName": fileName,
 	}
 
 	err = t.Execute(w, data)

@@ -1,26 +1,24 @@
 {{define "content"}}
-<div>
-    <form hx-post="/fetch-repo" hx-target="#commitsList">
-        <input type="text" name="repoURL" placeholder="Enter user/repo">
+<div class="p-8">
+    <form hx-post="/fetch-repo" hx-target="#commitsList" class="mb-6">
+        <input type="text" name="repoURL" placeholder="Enter user/repo" class="p-2 border rounded w-full bg-gruvbox-bg border-gruvbox-gray">
     </form>
-</div>
-<div class="grid grid-cols-5 gap-4">
-    <div  class="col-span-1">
-        <h1>Commits</h1>
-        <div id="commitsList"></div>
 
-    </div>
+    <div class="grid grid-cols-5 gap-8">
+        <div class="col-span-1">
+            <h1 class="font-semibold mb-4 text-xl text-gruvbox-green">Commits</h1>
+            <div id="commitsList"></div>
+        </div>
 
-    <div class="col-span-3">
-        <h1>File</h1>
+        <div id="code" class="col-span-3 overflow-x-auto">
+            <h1 class="font-semibold mb-4 text-xl ">File</h1>
+            <div  class=""></div>
+        </div>
 
-        <div id="code"></div>
-    </div>
-
-    <div class="col-span-1">
-        <h1>Files</h1>
-
-        <div id="files"></div>
+        <div class="col-span-1">
+            <h1 class="font-semibold mb-4 text-xl text-gruvbox-yellow">Files</h1>
+            <div id="files"></div>
+        </div>
     </div>
 </div>
 {{end}}
