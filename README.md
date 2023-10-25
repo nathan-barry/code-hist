@@ -1,6 +1,6 @@
-# Code History Viewer
+# Pretty Commit
 
-![Code-Hist Overview](/static/readme.png)
+![Pretty Commit Overview](/static/readme.png)
 
 Explore the history of a GitHub repository, viewing its commits, associated files, and the content of individual files, all with a sleek, user-friendly interface.
 

@@ -12,7 +12,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	t := template.Must(template.ParseFiles("./views/partials/base.html", "./views/home/index.html"))
 
 	data := map[string]any{
-		"Title": "Whazzup Bitches",
+		"Title": "Pretty Commit",
 	}
 
 	err := t.ExecuteTemplate(w, "base.html", data)

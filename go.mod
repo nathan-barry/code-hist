@@ -1,4 +1,4 @@
-module github.com/nathan-barry/code-hist
+module github.com/nathan-barry/pretty-commit
 
 go 1.21.1
 

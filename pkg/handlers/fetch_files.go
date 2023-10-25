@@ -8,8 +8,8 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/nathan-barry/code-hist/pkg/api"
-	. "github.com/nathan-barry/code-hist/pkg/types"
+	"github.com/nathan-barry/pretty-commit/pkg/api"
+	. "github.com/nathan-barry/pretty-commit/pkg/types"
 )
 
 func FetchFilesHandler(w http.ResponseWriter, r *http.Request) {

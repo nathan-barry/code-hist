@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/nathan-barry/code-hist/pkg/api"
+	"github.com/nathan-barry/pretty-commit/pkg/api"
 )
 
 func FetchCodeHandler(w http.ResponseWriter, r *http.Request) {
