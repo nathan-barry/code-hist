@@ -475,11 +475,10 @@ body {
 
 /*     } */
 
-/* code { */
-
-/*     @apply text-sm bg-darkgrey text-highlight p-1 rounded */
-
-/* } */
+code {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
 
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
@@ -609,6 +608,10 @@ body {
   display: grid;
 }
 
+.hidden {
+  display: none;
+}
+
 .w-full {
   width: 100%;
 }
@@ -627,10 +630,6 @@ body {
 
 .overflow-x-auto {
   overflow-x: auto;
-}
-
-.whitespace-pre-wrap {
-  white-space: pre-wrap;
 }
 
 .rounded {
