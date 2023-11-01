@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/nathan-barry/pretty-commit/pkg/handlers"
+	"github.com/nathan-barry/pretty-commit/handlers"
 )
 
 func main() {

@@ -8,18 +8,22 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/nathan-barry/pretty-commit/pkg/api"
-	. "github.com/nathan-barry/pretty-commit/pkg/types"
+	"github.com/nathan-barry/pretty-commit/api"
+	. "github.com/nathan-barry/pretty-commit/types"
 )
+
+var githubKey string
+
+func init() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Printf("Warning: Error loading .env file: %s", err)
+	}
+	githubKey = os.Getenv("GITHUB_AUTH")
+}
 
 func FetchRepoHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Pinged -> FetchRepo")
-
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-	githubKey := os.Getenv("GITHUB_AUTH")
 
 	url := "https://api.github.com/repos/" + r.FormValue("repoURL") + "/commits"
 	fmt.Println(url)
@@ -36,7 +40,7 @@ func FetchRepoHandler(w http.ResponseWriter, r *http.Request) {
 		"URL":        url,
 	}
 
-	err = t.Execute(w, data)
+	err := t.Execute(w, data)
 	if err != nil {
 		fmt.Println("Template error:", err) // Log the error
 		http.Error(w, "Could not render template", http.StatusInternalServerError)
